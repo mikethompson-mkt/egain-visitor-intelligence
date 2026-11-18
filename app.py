@@ -115,11 +115,12 @@ with accounts:
  st.caption('IPinfo Lite returns ASN network owners, not verified website visitors. Network type is a heuristic classification and is not evidence of company identity or buying intent.')
  st.info('Upload a CSV containing: ip, company, company_domain, provider, confidence, lookup_date. The file is used only for this running session. A sample template is included in the project folder.')
  uploaded=st.file_uploader('Upload company enrichment CSV',type=['csv'],key='company_upload')
- if uploaded is None:
+ if uploaded is None and not Path('egain_ipinfo_network_enrichment.csv').exists():
   st.warning('No company enrichment loaded. Company names are unavailable in the original data; the IP explorer and other analytics remain fully functional.')
  else:
   try:
-   enrichment=pd.read_csv(uploaded,dtype=str).fillna('')
+   source=uploaded if uploaded is not None else 'egain_ipinfo_network_enrichment.csv'
+   enrichment=pd.read_csv(source,dtype=str).fillna('')
    required={'ip','company','company_domain','provider','confidence','lookup_date'}
    if not required.issubset(enrichment.columns):
     st.error('Missing CSV columns: '+', '.join(sorted(required-set(enrichment.columns))))
