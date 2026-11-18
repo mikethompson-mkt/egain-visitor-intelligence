@@ -113,7 +113,7 @@ with explore:
 with accounts:
  st.subheader('Network & company intelligence (optional enrichment)')
  st.caption('IPinfo Lite returns ASN network owners, not verified website visitors. Network type is a heuristic classification and is not evidence of company identity or buying intent.')
- st.info('Upload a CSV containing: ip, company, company_domain, provider, confidence, lookup_date. The file is used only for this running session. A sample template is included in the project folder.')
+ st.info('Upload a CSV containing: ip, company, company_domain, provider, confidence, lookup_date. The dashboard automatically loads a sample of 100 IPinfo-enriched IP addresses. Uploading a CSV is optional and temporarily replaces the sample for your session. A CSV template is included in the project folder.')
  uploaded=st.file_uploader('Upload company enrichment CSV',type=['csv'],key='company_upload')
  if uploaded is None and not Path('egain_ipinfo_network_enrichment.csv').exists():
   st.warning('No company enrichment loaded. Company names are unavailable in the original data; the IP explorer and other analytics remain fully functional.')
