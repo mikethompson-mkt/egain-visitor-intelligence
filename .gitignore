@@ -1,0 +1,6 @@
+__pycache__/
+.venv/
+*.xlsx
+*.log
+.streamlit/secrets.toml
+data/*.sqlite
